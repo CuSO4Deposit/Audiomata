@@ -18,6 +18,7 @@ ydl_opts = {
     "final_ext": "mp3",
     "format": "bestaudio/best",
     "fragment_retries": 10,
+    "trim_file_name": 70,
     "ignoreerrors": "only_download",
     "outtmpl": {
         "default": "%(title)s [%(id)s]\\%(title)s [%(id)s].%(ext)s",
