@@ -18,14 +18,16 @@ ydl_opts = {
     "final_ext": "mp3",
     "format": "bestaudio/best",
     "fragment_retries": 10,
-    "trim_file_name": 70,
+    "trim_file_name": 250,
     "ignoreerrors": "only_download",
     "outtmpl": {
-        "default": "%(title)s [%(id)s]\\%(title)s [%(id)s].%(ext)s",
-        "subtitle": "%(title)s [%(id)s]\\%(title)s [%(id)s].%(ext)s",
-        "thumbnail": "%(title)s [%(id)s]\\%(title)s [%(id)s].%(ext)s",
+        "default": "%(title)s [%(id)s]/%(title)s [%(id)s].%(ext)s",
+        "subtitle": "%(title)s [%(id)s]/%(title)s [%(id)s].%(ext)s",
+        "thumbnail": "%(title)s [%(id)s]/%(title)s [%(id)s].%(ext)s",
     },
-    "paths": {"home": base_path},
+    "paths": {
+        "home": base_path,
+    },
     "postprocessors": [
         {"format": "lrc", "key": "FFmpegSubtitlesConvertor", "when": "before_dl"},
         {"format": "png", "key": "FFmpegThumbnailsConvertor", "when": "before_dl"},
@@ -52,7 +54,9 @@ for i in sections:
     output_path = base_path / i
     output_path.mkdir(exist_ok=True)
     dateafter = config[i]["DateAfter"]
-    ydl_opts["paths"] = {"home": str(output_path)}
+    ydl_opts["paths"] = {
+        "home": str(output_path),
+    }
     ydl_opts["daterange"] = DateRange(dateafter, "99991231")
     with YoutubeDL(ydl_opts) as ydl:
         ydl.download([target])
