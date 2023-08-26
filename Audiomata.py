@@ -51,7 +51,14 @@ for i in sections:
     if i == "meta":
         continue
     target = config[i]["Target"]
-    output_path = base_path / i
+    output_path = base_path
+    try:
+        sub_dir = config[i]["SubDir"]
+        output_path = output_path / sub_dir
+        output_path.mkdir(exist_ok=True)
+    except:
+        pass
+    output_path = output_path / i
     output_path.mkdir(exist_ok=True)
     dateafter = config[i]["DateAfter"]
     ydl_opts["paths"] = {
